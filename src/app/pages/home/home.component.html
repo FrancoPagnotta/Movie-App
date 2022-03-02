@@ -1,1 +1,6 @@
-<app-slideshow></app-slideshow>
+<div *ngIf="movies.length > 0" 
+	class="row">
+	<div class="col">
+		<app-slideshow [inputMovies]="movies"></app-slideshow>
+	</div>
+</div>
