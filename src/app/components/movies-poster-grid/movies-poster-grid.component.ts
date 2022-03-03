@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Movie } from 'src/app/interfaces/billboard-response';
 
 @Component({
   selector: 'app-movies-poster-grid',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MoviesPosterGridComponent implements OnInit {
 
-  constructor() { }
+  @Input() inputMovies: Movie[] = [];
 
+  constructor() { }
+  
   ngOnInit(): void {
+    console.log(this.inputMovies)
   }
 
 }
