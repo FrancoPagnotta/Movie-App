@@ -19,10 +19,14 @@ export class HomeComponent implements OnInit {
     const maxWindowHeight = (document.documentElement.scrollHeight || document.body.scrollHeight)
 
     if (position > maxWindowHeight) {
-      this.moviesService.getMovieBillboard()
-        .subscribe(resp => {
-          this.movies.push(...resp.results)
-        })
+      if (this.moviesService.loading) {
+        return
+      } else {
+        this.moviesService.getMovieBillboard()
+          .subscribe(resp => {
+            this.movies = resp;
+          })
+      }
     }
   }
 
@@ -31,8 +35,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.moviesService.getMovieBillboard()
       .subscribe(resp => {
-        this.moviesSlideShow = resp.results;
-        this.movies = resp.results;
+        this.moviesSlideShow = resp;
+        this.movies = resp;
       });
   }
 
