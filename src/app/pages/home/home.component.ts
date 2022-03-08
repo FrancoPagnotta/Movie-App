@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
       } else {
         this.moviesService.getMovieBillboard()
           .subscribe(resp => {
-            this.movies = resp;
+            this.movies.push(...resp);
           })
       }
     }
