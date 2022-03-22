@@ -36,4 +36,13 @@ export class MoviesService {
         })
       )
   }
+
+  searchMovies(movieName: string): Observable<Movie[]> {
+    const params = {...this.params, page: 1, query: movieName}
+    return this.http.get<BillboardResponse>(`${this.url}/search/movie`, {
+      params
+    }).pipe(
+      map(resp => resp.results)
+    )
+  }
 }
