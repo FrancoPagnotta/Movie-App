@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
       return 
     } else {
       this.router.navigateByUrl(`/search/${textToSearch}`)
-    }
+    }  
   }
 
 }
