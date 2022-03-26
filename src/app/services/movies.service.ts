@@ -8,7 +8,7 @@ import { map, tap } from 'rxjs/operators';
 })
 export class MoviesService {
   private url: string = 'https://api.themoviedb.org/3';
-  private billboardPage: number = 1;
+  public billboardPage: number = 1;
   public loading: boolean = false;
 
   constructor(private http: HttpClient) { }
@@ -44,5 +44,9 @@ export class MoviesService {
     }).pipe(
       map(resp => resp.results)
     )
+  }
+
+  resetBillboardPage() {
+    this.billboardPage = 1;
   }
 }
