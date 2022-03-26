@@ -1,8 +1,9 @@
 <h1> Matches for <b> {{ movieToSearch }} </b> </h1>
 
 <div class="row mt-5">
-	<div *ngFor="let movie of foundMovies" 
-		class="col-md-3 mb-5">
+	<div 
+		*ngFor="let movie of foundMovies" 
+		class="col-md-3 mb-5 fadeIn">
 		<img class="img-fluid poster" [src]="movie.poster_path | poster">
 		<div>
 			<h3> {{ movie.title }} </h3>
