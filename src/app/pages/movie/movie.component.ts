@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -16,7 +17,8 @@ export class MovieComponent implements OnInit, OnDestroy {
   movie!: MovieResponse
 
   constructor(private activatedRoute: ActivatedRoute,
-              private moviesService: MoviesService) { }
+              private moviesService: MoviesService,
+              private location: Location) { }
 
   ngOnInit(): void {
    this.movieId = this.activatedRoute.snapshot.params.id;
@@ -33,6 +35,8 @@ export class MovieComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe()
   }
-  
 
+  goBack(): void {
+    this.location.back()
+  }
 }
