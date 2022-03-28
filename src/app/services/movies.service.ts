@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BillboardResponse, Movie } from '../interfaces/billboard-response';
 import { map, tap } from 'rxjs/operators';
+import { MovieResponse } from '../interfaces/movie-response';
 @Injectable({
   providedIn: 'root'
 })
@@ -48,5 +49,11 @@ export class MoviesService {
 
   resetBillboardPage() {
     this.billboardPage = 1;
+  }
+
+  getMovieDetails(movieId: number) {
+    return this.http.get<MovieResponse>(`${this.url}/movie/${movieId}`, {
+      params: this.params
+    });
   }
 }
