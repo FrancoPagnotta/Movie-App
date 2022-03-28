@@ -1,1 +1,30 @@
-<p>movie works!</p>
+<div 
+	*ngIf="movie" 
+	class="row">
+	<div class="col-md-6 text-center">
+		<img 
+			class="card-img w-75 h-75" 
+			[src]="movie.poster_path | poster" 
+			[alt]="movie.title">
+	</div>
+	<div class="col-md-6">
+		<h1 class="card-title"> {{ movie.original_title }} </h1>
+		<div class="d-flex align-items-center">
+			<star-rating [value]="movie.vote_average" 
+						[totalstars]="10" 
+						checkedcolor="red" 
+						uncheckedcolor="black" 
+						size="20px" 
+						[readonly]="true">
+			</star-rating>
+			<div class="col-2 text-white mx-2">
+				{{ movie.vote_average | number: '1.1' }} <!-- Un un numero y un decimal -->
+			</div>
+		</div>
+		<p class="card-text"> {{ movie.overview }} </p>
+		<p class="card-text"> {{ movie.tagline }} </p>
+		<div>
+			<button class="btn btn-outline-success"> Come Back </button>
+		</div>
+	</div>
+</div>
