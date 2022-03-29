@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { BillboardResponse, Movie } from '../interfaces/billboard-response';
-import { map, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { MovieResponse } from '../interfaces/movie-response';
+import { CreditsResponse } from '../interfaces/credits-response';
 @Injectable({
   providedIn: 'root'
 })
@@ -54,6 +55,17 @@ export class MoviesService {
   getMovieDetails(movieId: number) {
     return this.http.get<MovieResponse>(`${this.url}/movie/${movieId}`, {
       params: this.params
-    });
+    }).pipe(
+      catchError(err => of(null)) //Recordar que el of devuelve un observable
+    )
+  }
+
+  getMovieCredits(movieId: number) {
+    return this.http.get<CreditsResponse>(`${this.url}/movie/${movieId}/credits`, {
+      params: this.params
+    }).pipe(
+      map(resp => resp.cast),
+      catchError(err => of(null))
+    )
   }
 }
