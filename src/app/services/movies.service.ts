@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { BillboardResponse, Movie } from '../interfaces/billboard-response';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MovieResponse } from '../interfaces/movie-response';
-import { CreditsResponse } from '../interfaces/credits-response';
+import { Cast, CreditsResponse } from '../interfaces/credits-response';
 @Injectable({
   providedIn: 'root'
 })
@@ -52,7 +52,7 @@ export class MoviesService {
     this.billboardPage = 1;
   }
 
-  getMovieDetails(movieId: number) {
+  getMovieDetails(movieId: number): Observable<MovieResponse | null> {
     return this.http.get<MovieResponse>(`${this.url}/movie/${movieId}`, {
       params: this.params
     }).pipe(
@@ -60,7 +60,7 @@ export class MoviesService {
     )
   }
 
-  getMovieCredits(movieId: number) {
+  getMovieCredits(movieId: number): Observable<Cast[] | null> {
     return this.http.get<CreditsResponse>(`${this.url}/movie/${movieId}/credits`, {
       params: this.params
     }).pipe(
