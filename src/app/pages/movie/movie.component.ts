@@ -45,7 +45,7 @@ export class MovieComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.moviesService.getMovieCredits(this.movieId).subscribe(resp => {
         if (resp) {
-          this.cast = resp;
+          this.cast = resp.filter(actor => actor.profile_path != null)
         }
       })
     )
