@@ -1,7 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Cast } from 'src/app/interfaces/credits-response';
 import { MovieResponse } from 'src/app/interfaces/movie-response';
 import { MoviesService } from 'src/app/services/movies.service';
 
@@ -13,30 +14,51 @@ import { MoviesService } from 'src/app/services/movies.service';
 export class MovieComponent implements OnInit, OnDestroy {
 
   movieId!: number
-  subscription!: Subscription
+  subscriptions: Subscription[] = []
   movie!: MovieResponse
+  cast: Cast[] = []
 
   constructor(private activatedRoute: ActivatedRoute,
               private moviesService: MoviesService,
-              private location: Location) { }
+              private location: Location,
+              private router: Router) { }
 
   ngOnInit(): void {
    this.movieId = this.activatedRoute.snapshot.params.id;
    this.getDetails()
+   this.getCredits()
   }
 
   getDetails(): void {
-    this.subscription = this.moviesService.getMovieDetails(this.movieId).subscribe(resp => {
-      console.log(resp)
-      this.movie = resp
-    })
+    this.subscriptions.push(
+      this.moviesService.getMovieDetails(this.movieId).subscribe(resp => {
+        if (resp) {
+          this.movie = resp;
+        } else {
+          this.router.navigateByUrl("/");
+        }
+      })
+    )
+  }
+
+  getCredits(): void {
+    this.subscriptions.push(
+      this.moviesService.getMovieCredits(this.movieId).subscribe(resp => {
+        if (resp) {
+          this.cast = resp;
+        }
+      })
+    )
+  }
+  
+  goBack(): void {
+    this.location.back();
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe()
+    for (const subscription of this.subscriptions) {
+      subscription.unsubscribe();
+    }
   }
 
-  goBack(): void {
-    this.location.back()
-  }
 }
