@@ -1,0 +1,13 @@
+.movie-info {
+	overflow: hidden;
+}
+
+.card-overview {
+	font-size: 24px;
+	font-weight: 200;
+}
+
+.card-tagline {
+	font-size: 20px;
+	font-weight: 200;
+}
