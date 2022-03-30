@@ -8,6 +8,7 @@ import { MoviesPosterGridComponent } from './movies-poster-grid/movies-poster-gr
 import { RatingModule } from 'ng-starrating';
 import { PipesModule } from '../pipes/pipes.module';
 import { CastSlideshowComponent } from './cast-slideshow/cast-slideshow.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { CastSlideshowComponent } from './cast-slideshow/cast-slideshow.componen
     CommonModule,
     RouterModule,
     RatingModule,
-    PipesModule
+    PipesModule,
+    ReactiveFormsModule
   ],
   exports: [
     NavbarComponent,

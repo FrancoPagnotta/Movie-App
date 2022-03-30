@@ -2,12 +2,12 @@
 	<a class="navbar-brand" routerLink="/home"> MovieApp </a>
 	<div class="navbar-form form-inline">
 	  <input 
-	        #txtSearch 
-			(keyup.enter)="searchMovie(txtSearch.value)"
+			(keyup.enter)="searchMovie()"
 			class="form-control mr-sm-2" 
 			type="search" 
 			placeholder="Search movie" 
-			aria-label="Search">
-	  <button (click)="searchMovie(txtSearch.value)" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			aria-label="Search"
+			[formControl]="inputMovie">
+	  <button (click)="searchMovie()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 	</div>
 </nav>
